@@ -247,9 +247,9 @@ function App() {
 
                 <br />
 
-                <ProgressBar completed={amount} />
+                <ProgressBar completed={parseInt(amount) + parseInt(state.donated ? state.donated : 0)} />
 
-                <h1 className={(amount + (state.donated ? state.donated : 0)) >= 100 ? '' : 'invisible'}>
+                <h1 className={(parseInt(amount) + parseInt(state.donated ? state.donated : 0)) >= 100 ? '' : 'invisible'}>
                     You'll get an NFT
                 </h1>
 

@@ -2,11 +2,10 @@ import './App.css';
 
 //external:
 import React, { useState, useEffect } from 'react';
-import { Tweet } from 'react-twitter-widgets'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 //internal:
-//import TweetPreview from './components/TweetPreview'
+import TweetPreview from './components/TweetPreview'
 import { userWallet, userWalletByTwitterUserId, connectWallet } from './utils/Backend'
 
 //Web3:
@@ -261,11 +260,7 @@ function App() {
                 <button onClick={onApprovalClick}>Approval</button>
                 <button onClick={onRefreshClick}>Refresh</button>
 
-                <div className={state?.tweetId ? '' : 'invisible'}>
-                    <br />
-                    <Tweet tweetId={state?.tweetId} />
-                </div>
-
+                <TweetPreview tweetId={state?.tweetId} />
             </div>
 
             <div className={state.isConfirmationVisible ? 'approval' : 'invisible'}>
@@ -276,10 +271,8 @@ function App() {
                 <h4>some info</h4>
                 <button onClick={onSendRewardClick}>Approve</button>
 
-                <Tweet tweetId={state?.tweetId} />
+                <TweetPreview tweetId={state?.tweetId}/>
             </div>
-
-
         </div>
     );
 }

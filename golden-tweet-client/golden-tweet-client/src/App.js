@@ -9,11 +9,15 @@ import { Tweet } from 'react-twitter-widgets'
 import { userWallet, userWalletByTwitterUserId, connectWallet } from './utils/Backend'
 
 //Web3:
-import { ethers } from 'ethers';
+import { ethers, getDefaultProvider } from 'ethers';
 
 import ERC20 from './jsons/ERC20.json';
 import Multicall from './jsons/Multicall.json';
 import SocialNFT from './jsons/SocialNFT.json';
+import SocialDiamond from './jsons/SocialDiamond.json';
+
+const _daiAddress = '0x8B5D21DEfB46ec472B113639338c9401B0D0b60d';
+const _diamondAddress = '0xC9fd3EFfFf3f6ab127522634c63Ba7160d878D57';
 
 function App() {
     useEffect(() => {
@@ -23,6 +27,8 @@ function App() {
         isConfirmationVisible: false
     });
 
+    const [amount, setAmount] = useState(1);
+
     var onTweetLinkChanged = (value) => {
         var index = value.lastIndexOf('/');
 
@@ -31,33 +37,91 @@ function App() {
             var tweetId = value.substr(index + 1);
         }
 
-        setState({
-            ...state,
-            tweetId: tweetId
-        });
+        setState(prevState => ({
+            ...prevState,
+            tweetId: tweetId,
+            tweetLink: value
+        }));
+    };
+
+    var onAmountChanged = (value) => {
+        setAmount(value);
     };
 
     var onRewardClick = () => {
-        setState({
-            ...state,
+        setState(prevState => ({
+            ...prevState,
             isConfirmationVisible: true
-        });
+        }));
+    };
+
+    var onApprovalClick = async () => {
+        var erc20Contract = await getErc20Contract();
+        await erc20Contract
+            .connect(getProvider().getSigner())
+            .approve(state.diamondAddress, ethers.constants.MaxUint256);
+
+        var address = await getAddress();
+        var allowance = await erc20Contract.allowance(address, _diamondAddress);
+        allowance = ethers.utils.formatEther(allowance);
+
+        setState(prevState => ({
+            ...prevState,
+            allowance: allowance
+        }));
+    };
+
+    var onRefreshClick = async () => {
+        var erc20Contract = await getErc20Contract();
+
+        var address = await getAddress();
+        var allowance = await erc20Contract.allowance(address, _diamondAddress);
+        allowance = ethers.utils.formatEther(allowance);
+
+        setState(prevState => ({
+            ...prevState,
+            allowance: allowance
+        }));
     };
 
     var onCancelClick = () => {
-        setState({
-            ...state,
+        setState(prevState => ({
+            ...prevState,
             isConfirmationVisible: false
-        });
+        }));
     };
 
-    var onApproveClick = () => {
-        alert('waiting to be implemented...');
+    var onSendRewardClick = async () => {
+        const recepientAddress = '0x56d15fcbf7Be4E25a18F0A11331F9961f58a311c';
+
+        console.log('amount: ' + amount);
+        var _amount = ethers.BigNumber
+            .from(amount)
+            .mul(ethers.BigNumber.from(10).pow(18));
+        console.log('_amount: ' + _amount.toString());
+
+        var socialDiamondContract = await getSocialDiamondContract();
+        await socialDiamondContract
+            .connect(getProvider().getSigner())
+            .fundTweet(_amount, state.tweetLink, recepientAddress);
+
+        var address = await getAddress();
+        console.log(address);
+
+        var donated = await socialDiamondContract
+            .donated(address);
+
+        donated = ethers.utils.formatEther(donated);
+
+        setState(prevState => ({
+            ...prevState,
+            donated: donated
+        }));
     };
 
     var onConnectWalletClick = async () => {
-        var result = await connect();
-        await loadBalance(result);
+        await connect();
+        await loadBalance();
     };
 
     var getProvider = () => {
@@ -77,53 +141,59 @@ function App() {
 
         await provider.send("eth_requestAccounts", []);
 
-        const daiAddress = '0x8B5D21DEfB46ec472B113639338c9401B0D0b60d';
-        const erc20Contract = new ethers.Contract(daiAddress, ERC20.abi, provider);
+        var socialDiamondContract = await getSocialDiamondContract()
+        console.log(socialDiamondContract);
 
-        setState({
-            ...state,
-            erc20Contract: erc20Contract,
-            provider: provider
-        });
+        var address = await getAddress();
 
-        return {
-            erc20Contract: erc20Contract,
-            provider: provider
-        };
+        var donated = await socialDiamondContract
+            .donated(address);
+
+        donated = ethers.utils.formatEther(donated);
+
+        setState(prevState => ({
+            ...prevState,
+            donated: donated,
+            address: address
+        }));
     }
 
-    async function loadBalance(connectionResult) {
-        var connection = connectionResult;//todo or state
+    async function getAddress() {
+        const signer = getProvider().getSigner();
+        return await signer.getAddress();
+    }
 
-        const signer = connection.provider.getSigner();
-        const address = await signer.getAddress();
-        const diamondAddress = '0xC9fd3EFfFf3f6ab127522634c63Ba7160d878D57';
+    async function loadBalance() {
+        var address = await getAddress();
 
         console.log(address);
 
         let balance = 0;
         let allowance = 0;
         if (address) {
-            balance = await connection.erc20Contract.balanceOf(address);
-            allowance = await connection.erc20Contract.allowance(address, diamondAddress);
-
-            //convert balance
-            console.log(balance);
+            var erc20Contract = await getErc20Contract();
+            balance = await erc20Contract.balanceOf(address);
             balance = ethers.utils.formatEther(balance);
-            console.log(balance);
 
-            //convert allowance
-            console.log(allowance);
+            allowance = await erc20Contract.allowance(address, _diamondAddress);
             allowance = ethers.utils.formatEther(allowance);
-            console.log(allowance);
 
-            setState({
-                ...state,
+            setState(prevState => ({
+                ...prevState,
                 balance: balance,
-                allowance: allowance
-            });
+                allowance: allowance,
+                diamondAddress: _diamondAddress
+            }));
         }
     };
+
+    async function getErc20Contract() {
+        return await new ethers.Contract(_daiAddress, ERC20.abi, getProvider());
+    }
+
+    async function getSocialDiamondContract() {
+        return await new ethers.Contract(_diamondAddress, SocialDiamond.abi, getProvider());
+    }
 
     function multicallStuff() {
         const multicallAddress = '0x9aEeeD65aE87e3b28793aefAeED59c3f10ef956b';
@@ -142,6 +212,8 @@ function App() {
             <div>
                 Connect to wallet
                 <button onClick={onConnectWalletClick}>Connect</button>
+                <br />
+                {state.donated ? 'Donated: ' + Math.round(state.donated) : ''}
             </div>
 
             <h1>Social Diamond</h1>
@@ -164,19 +236,21 @@ function App() {
 
                 <h2>3. Choose amount & select coin</h2>
 
-                <input type="number" className="amount" defaultValue="1" min="1" />
+                <input onChange={(e) => onAmountChanged(e.target.value)} type="number" className="amount" defaultValue="1" min="1" />
                 <select>
                     <option value="test" defaultValue>Generosity Coin</option>
                 </select>
 
-                {state.balance ? '(balance: ' + state.balance + ')' : ''}
-                {state.allowance ? '(allowance: ' + state.allowance + ')' : ''}
+                {state.balance ? '(balance: ' + Math.round(state.balance) + ')' : ''}
+                {state.allowance === 0 ? '(allowance: ' + state.allowance + ')' : ''}
 
                 <br />
                 <br />
 
                 <h2>4. Reward the tweet</h2>
                 <button onClick={onRewardClick} disabled={!state?.tweetId}>Reward</button>
+                <button onClick={onApprovalClick}>Approval</button>
+                <button onClick={onRefreshClick}>Refresh</button>
 
                 <div className={state?.tweetId ? '' : 'invisible'}>
                     <br />
@@ -191,7 +265,7 @@ function App() {
                 <h2>Summary</h2>
 
                 <h4>some info</h4>
-                <button onClick={onApproveClick}>Approve</button>
+                <button onClick={onSendRewardClick}>Approve</button>
 
                 <Tweet tweetId={state?.tweetId} />
             </div>

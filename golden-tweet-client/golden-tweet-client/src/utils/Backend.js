@@ -4,7 +4,7 @@ const BACKEND_URL = '';
 
 export async function userWallet() {
     var data = await axios.get(BACKEND_URL + '/userWallet');
-    console.log(data.wallet);
+    console.log(data);
 
     /*
  GET /userWallet
@@ -35,3 +35,16 @@ export async function connectWallet() {
      - store this wallet address as the recipient for rewards of the currently logged in twitter user
  */
 }
+
+export async function tweetAuthor(url) {
+    var data = await axios.get(BACKEND_URL + '/tweetAuthor', {
+        url: url
+    });
+    console.log(data.author);
+
+    /*
+  GET /tweetAuthor/?url=urlencoded-tweet-url
+     returns: {"author":"283094285"}
+  */
+}
+

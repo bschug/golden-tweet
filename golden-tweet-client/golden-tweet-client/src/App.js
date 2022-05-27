@@ -17,7 +17,6 @@ import SocialNFT from './jsons/SocialNFT.json';
 
 function App() {
     useEffect(() => {
-        Backend.justAnAlert();
     }, []);
 
     const [state, setState] = useState({

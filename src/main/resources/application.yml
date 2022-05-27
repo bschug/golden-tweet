@@ -1,0 +1,17 @@
+amazon:
+  aws:
+    accesskey: test
+    region: eu-central-1
+    secretkey: test
+  dynamodb:
+    endpoint: 'http://localhost:4566/'
+server:
+  port: 8888
+spring:
+  application:
+    name: donation-server
+twitter:
+  api:
+    clientid: key
+    secret: secret
+env: local

@@ -3,7 +3,7 @@
 pragma solidity ^0.8.9;
 
 import "./interfaces/ERC20/IERC20.sol";
-import "./interfaces/ERC20/IERC20Mintable.sol";
+import "./interfaces/ISocialNFT.sol";
 import "./libraries/EnumerableSet.sol";
 import "./libraries/Ownable.sol";
 
@@ -26,15 +26,16 @@ contract SocialDiamond is Ownable {
   mapping(address => Reward) public userRewards;
 
   mapping(address => uint256) public donated;
-
+  mapping(address => uint256) public currentTier;
+  uint256[] tiers;
   // url -> asset -> balance
   mapping(string => uint256) public rewardPerTweet;
 
   uint256 public totalTransactionVolume;
 
-  constructor(address _initialAsset, address _reward) Ownable() {
+  constructor(address _initialAsset, uint256[] memory _tiers) Ownable() {
     asset = _initialAsset;
-    reward = _reward;
+    tiers = _tiers;
   }
 
   function fundTweet(
@@ -46,8 +47,9 @@ contract SocialDiamond is Ownable {
     rewardPerTweet[_link] += _amount;
     totalTransactionVolume += _amount;
     userRewards[_recipient].pending += _amount;
-    donated[msg.sender] += _amount;
-    IERC20Mintable(reward).mint(msg.sender, _amount);
+    if (getEligibility(_amount)) {
+      ISocialNFT(reward).mint(msg.sender);
+    }
     if (!funded[_link][msg.sender]) {
       {
         countTweetsFunded[msg.sender] += 1;
@@ -68,6 +70,10 @@ contract SocialDiamond is Ownable {
     asset = _asset;
   }
 
+  function replaceReward(address _newReward) public onlyOwner {
+    reward = _newReward;
+  }
+
   function getUserRewards(address _user)
     public
     view
@@ -86,5 +92,14 @@ contract SocialDiamond is Ownable {
     returns (string memory)
   {
     return tweetsFundedForUser[_user][_index];
+  }
+
+  function getEligibility(uint256 _amount) internal returns (bool) {
+    uint256 _current = donated[msg.sender];
+    uint256 _new = _current + _amount;
+    donated[msg.sender] = _new;
+    if (tiers[0] > _current && tiers[0] <= _new) {
+      return true;
+    } else return false;
   }
 }

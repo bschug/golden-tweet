@@ -1,0 +1,301 @@
+{
+	"compiler": {
+		"version": "0.8.14+commit.80d49f37"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_initialAsset",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_reward",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					}
+				],
+				"name": "claim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "donated",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_link",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					}
+				],
+				"name": "fundTweet",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserRewards",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "claimed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "pending",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct SocialDiamond.Reward",
+						"name": "_rewards",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_asset",
+						"type": "address"
+					}
+				],
+				"name": "replaceAsset",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "rewardPerTweet",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalTransactionVolume",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner_",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "userRewards",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "claimed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pending",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/SocialDiamond.sol": "SocialDiamond"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/SocialDiamond.sol": {
+			"keccak256": "0xa20356dde51cb446080d0512a9d8c91ce876bd18154f6bd38b569d547b5b3aa6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f160686776da9b471ceeaf2354cb5aa272f80439da946da156399bacb9991a7c",
+				"dweb:/ipfs/QmW3MWaxiErdPEmVNQVbXPAFPRfsHGAkQ5ryr77jHmLMLb"
+			]
+		},
+		"contracts/interfaces/ERC20/IERC20.sol": {
+			"keccak256": "0xa2f712c5ab556b7bbe5919296ac2874a4ca78a8ca003c77ace94d5fcb3f853bd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e579422d6f86016590483c0239d9df56fd982bda505250949408e8268301d417",
+				"dweb:/ipfs/QmSTU2wWVXKN4GfYYZXa4Gup7ka1aNuHsr8fsUA7vphPYS"
+			]
+		},
+		"contracts/interfaces/ERC20/IERC20Mintable.sol": {
+			"keccak256": "0x5e534afedb9beae36fe1836fbf8d0b3b29ca373345744e44758dd850a32beaf2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://519444d292965613a2a9011cd47154899c22ec18191311a7493e897cf0156b14",
+				"dweb:/ipfs/QmSRZVs3wDSFXYAFn8NnxBcJd58mjKkn4bdZRoVfi3bACD"
+			]
+		},
+		"contracts/libraries/EnumerableSet.sol": {
+			"keccak256": "0x670a67e92ea895bd14d2cbbdf5468caa62966f7bbb9660082e87af0b771b9233",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4630389b6bf69c3a0275ca5b1c0a5e917e402f3266bedc39adf4809ac6c3669d",
+				"dweb:/ipfs/Qme2Xp2PVt8PA6QZyHU3uAzwATE7dCfPdxbLzKEqwBxKrg"
+			]
+		},
+		"contracts/libraries/Ownable.sol": {
+			"keccak256": "0xd7b4dc37eb1f4eb332a7e734a110dfcf7ccfb2b7c450df0053c2d4e60da1b006",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://adf26ae680fe584da66851fb9dd866499884052bcd3f75c76db56a1538371cb9",
+				"dweb:/ipfs/QmSMDkGJ21DUzK1LuVUkXtf6MhDBWDgjsbKXQFcNCwUAoo"
+			]
+		}
+	},
+	"version": 1
+}

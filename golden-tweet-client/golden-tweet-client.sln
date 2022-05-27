@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "golden-tweet-client", "golden-tweet-client\golden-tweet-client.esproj", "{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8369A8-5A7B-4DB7-A2D5-E71D8F94F46C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DA637FE-9B44-4E22-B623-1B06DEBFED5B}
+	EndGlobalSection
+EndGlobal

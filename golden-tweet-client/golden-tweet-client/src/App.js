@@ -3,6 +3,7 @@ import './App.css';
 //external:
 import React, { useState, useEffect } from 'react';
 import { Tweet } from 'react-twitter-widgets'
+import ProgressBar from "@ramonak/react-progress-bar";
 
 //internal:
 //import TweetPreview from './components/TweetPreview'
@@ -243,6 +244,14 @@ function App() {
 
                 {state.balance ? '(balance: ' + Math.round(state.balance) + ')' : ''}
                 {state.allowance === 0 ? '(allowance: ' + state.allowance + ')' : ''}
+
+                <br />
+
+                <ProgressBar completed={amount} />
+
+                <h1 className={(amount + (state.donated ? state.donated : 0)) >= 100 ? '' : 'invisible'}>
+                    You'll get an NFT
+                </h1>
 
                 <br />
                 <br />

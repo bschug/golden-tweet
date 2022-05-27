@@ -4,3 +4,6 @@ solidity/cache
 solidity/bin
 solidity/abi
 solidity/.env
+.idea
+backend/.idea
+backend/target

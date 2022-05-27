@@ -16,9 +16,9 @@ import lombok.Setter;
 @Getter
 public class AuthorsModel {
     @DynamoDBHashKey(attributeName = "twitter_id")
-    private String tweeterId;
-    @DynamoDBAttribute(attributeName = "user_id")
-    private String userId;
+    private Long twitterId;
+    @DynamoDBAttribute(attributeName = "twitter_username")
+    private String twitterUsername;
     @DynamoDBAttribute(attributeName = "wallet_address")
     private String walletAddress;
 }

@@ -10,4 +10,9 @@ public class MainController {
     public String index() {
         return "index.html";
     }
+
+//    @RequestMapping("/error")
+//    public String error() {
+//        return "error.html";
+//    }
 }

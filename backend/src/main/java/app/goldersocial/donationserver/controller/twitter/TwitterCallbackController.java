@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 import twitter4j.Twitter;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
@@ -16,13 +17,13 @@ import twitter4j.auth.RequestToken;
 @Slf4j
 public class TwitterCallbackController {
     @RequestMapping("/twitterCallback")
-    public String twitterCallback(@RequestParam(value="oauth_verifier", required=false) String oauthVerifier,
-                                  @RequestParam(value="denied", required=false) String denied,
-                                  HttpServletRequest request, HttpServletResponse response, Model model) {
+    public RedirectView twitterCallback(@RequestParam(value="oauth_verifier", required=false) String oauthVerifier,
+                                        @RequestParam(value="denied", required=false) String denied,
+                                        HttpServletRequest request, HttpServletResponse response, Model model) {
 
         if (denied != null) {
             //if we get here, the user didn't authorize the app
-            return "redirect:twitterLogin";
+            return new RedirectView("error.html");
         }
 
         //get the objects from the session
@@ -38,11 +39,11 @@ public class TwitterCallbackController {
 
             //store the user name so we can display it on the web page
             model.addAttribute("username", twitter.getScreenName());
-
-            return "twitterLoggedIn";
+            //twitter.getOAuthAccessToken().userId -- unique ID
+            return new RedirectView("index.html");
         } catch (Exception e) {
             log.error("Problem getting token!",e);
-            return "redirect:twitterLogin";
+            return new RedirectView("error.html");
         }
     }
 }

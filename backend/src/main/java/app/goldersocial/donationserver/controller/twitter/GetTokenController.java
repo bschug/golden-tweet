@@ -27,6 +27,10 @@ public class GetTokenController {
         //this will be the URL that we take the user to
         String twitterUrl = "";
 
+        if (request.getSession() != null || request.getSession().getAttribute("twitter") != null) {
+            return new RedirectView("index.html");
+        }
+
         try {
             //get the Twitter object
             Twitter twitter = twitterApiConfig.getTwitter();

@@ -12,7 +12,7 @@ spring:
     name: donation-server
 twitter:
   api:
-    clientid: key
-    secret: secret
+    clientid: y7A7dhU8o193NCmHqjsUSYnNZ
+    secret: Es22IHfi2zQRjIyxbhvg8wSGKzeNbvS4uisQpCzXe0RyT6nobH
     callback: http://localhost:8888/twitterCallback
 env: local

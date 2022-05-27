@@ -1,0 +1,63 @@
+Nothing to compile
+No need to generate any newer typings.
+deployer 0x10E38dFfFCfdBaaf590D5A9958B01C9cfcF6A63B
+2ndParty 0xf67c17F9eB5CB0eB71628714E2bA0bDe8d92d5CC
+get stables contracts
+dai
+deploying "RequiemERC20Token" (tx: 0x4525c8206ac23427f5e7c388283d903281418480a5b526f772a2f2c1d6adc109)...: deployed at 0x852b6aA56F2e7C16D061E4e3030b8819B08a024C with 1432712 gas
+executing RequiemERC20Token.setMinter (tx: 0xc17957698ec89aec017b8e4a73766d6bb1e1a58df70eda62caad90f92502c602) ...: performed with 50353 gas
+deploying "sRequiem" (tx: 0xb14ce8200e87351c8a75dddc9b5d41bc83a265811bfe930a1626ccdd5ffcb5f7)...: deployed at 0xF6cC340F63148bE23BDf659A313F4b65178Dd05E with 1452267 gas
+executing sRequiem.setIndex (tx: 0x37069c6da1147ae252a989396d107f6e95ebf4e6506dad4ec0fe7eb169efd117) ...: performed with 48192 gas
+deploying "gREQ" (tx: 0x6002908f4d281e58a3ab95bc5ac485cb3afdd3ab07e0f0b90eb9bcc05d0fed07)...: deployed at 0x7554faD7915BF9cE5d860507201378f61d8a4110 with 1469238 gas
+executing gREQ.mint (tx: 0xc0aba3a356be7ffe28f34992191cb2b371c243dbf37ffe47a89cd264b1610b81) ...: performed with 75097 gas
+deploying "Authority" (tx: 0x48bf9074175d05eae2427900999c3c993bec9e335fdebcffc8fd6a9b4fdd926a)...: deployed at 0xe31cEF124b9a81Dd2131b39F41D156750CF60776 with 880271 gas
+deploying "Staking" (tx: 0x20c3cbb95ecf7c77c389d203342425861d6335cd0c39e58e5420e9395dba474b)...: deployed at 0x1Fd4Eb153954B13BDbF1F0B325E1323fd22a30Ef with 1675432 gas
+init sreq
+executing sRequiem.initialize (tx: 0xf072a313a67e56723ccd36f2a77e252fa56d3d6a6cae99cd5715b0e046965e4b) ...: performed with 76760 gas
+deploying "Treasury" (tx: 0x91093723535185cab25d67bf315aad4dba333111fbfdea137309ab1cf5d60561)...: deployed at 0xc7E6142a5586238eeBf8a0aA33D881C0D2C4b09e with 3181781 gas
+deploying "BondDepository" (tx: 0xf20a5236947315fc788362c55de9eb19994a5e759490ad0b3a089859f65ae284)...: deployed at 0x7C0adE653CFeb0cC9CB1122f034Af1D0CD2D7d3c with 3721556 gas
+set treasury as minter
+executing RequiemERC20Token.setMinter (tx: 0x7050a8d67c9089270be4578cd18656c38ddadfe1cd1ec1644482d0f9b96ba7fb) ...: performed with 50353 gas
+connect to treasury
+init Treasury
+executing Treasury.initialize (tx: 0x5ccf241676dc8b7d9a8c46606305b359508dee892fcf75e52750d33d1a1ee66d) ...: performed with 51087 gas
+queueTimelock depositor
+executing Treasury.queueTimelock (tx: 0x1c7e6a96c1ab0a38989b027cf4de9db9ff4411bc8eeb63d029e422aebe3819a7) ...: performed with 125317 gas
+executing Treasury.execute (tx: 0xbe37035b0554a359fd88a10c6a1b2408914e29f6cc003c9c3203551bf04d3ee5) ...: performed with 124666 gas
+queueTimelock token LP REQ DAI
+executing Treasury.queueTimelock (tx: 0xe7a087d0699be994296561f98c951e1b3adf064fbd359f2fedcff48d170b4ae6) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0xf46beb1817567c59159f04eaf7a233015cc01abcdc517b071d84812f49d01e1e) ...: performed with 149511 gas
+queueTimelock deposoitorC
+executing Treasury.queueTimelock (tx: 0x43e1c239d0329eab2b199d5d035ac1706fa321f915c5846878c3af5df8d2b90b) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x3e3f86153818c6138072eac6cf0aefbe14c4815540ed49a804010b6a9cd4ac2e) ...: performed with 110054 gas
+queueTimelock spender
+executing Treasury.queueTimelock (tx: 0x4ad08d56049b8b2e1759dec50eabf74bd1bde29e6fbdf3c0c2912cfbc5cc1ef1) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x7b88ff4f44d95efa8ceae0a27ea8452597225bbc7ea341f6a525f3d1ec680224) ...: performed with 124678 gas
+queueTimelock rewardmanager
+executing Treasury.queueTimelock (tx: 0x1fb6c3841c6eeb64aec5d04eeb41935a0845555543c6f2bdd115f38f3da4e8b0) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x330ad962b24bfdc46ea45541315b8c4c2fa9eadf92f9be111194526e5301d411) ...: performed with 124678 gas
+queueTimelock reserveToken
+executing Treasury.queueTimelock (tx: 0xfa024926484d96e5d264d5931e050f0d809c2dc5c7309ad766771370daeb79d6) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x619b7c5a3e0584a5f54bb2300aafd763b8568cddfb96095516080d63b2884852) ...: performed with 129754 gas
+queueTimelock reserveToken g
+executing Treasury.queueTimelock (tx: 0x64cf18a19c1fcc18c5e847d18ee8b07edca5d7d3a18d7109ce63b0be297f0955) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x456a91be8b9f40bac15ed72ed10bffa0e21c82ef7a746738b40fac0e9e2ecb3c) ...: performed with 115130 gas
+queueTimelock sreq
+executing Treasury.queueTimelock (tx: 0xf2067d1b8e2eb5273ae6275966e525775037a8f0e34b6d0f2808a5ae7494403a) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x61f3f379c00874683cdc1f3fa46a3ba009489eccf046406fd65a3fcd5cfbc976) ...: performed with 79208 gas
+queueTimelock token LP WETH USDC
+executing Treasury.queueTimelock (tx: 0x9406b4469b21a1212beea21ac160c160bb41f2372dafafeaa089a23bbe7c3526) ...: performed with 108217 gas
+executing Treasury.execute (tx: 0x52d62d45ea66b42dea84b615a2af7f7943b0c483e9a068ea0a5c55cfc71646c0) ...: performed with 139768 gas
+executing RequiemERC20Token.mint (tx: 0x6794b0bb0d5e15fbfffaca268a004a8d0d85819ebd5dc04b079c7fc5eca5603c) ...: performed with 95660 gas
+executing Treasury.auditReserves (tx: 0x2f71d6f4ae156d1c6d6c2f45f9b6f5d552f0a2af715c0f34d9772320e8c22f63) ...: performed with 222809 gas
+Current block timestamp 1643753672
+TD1 166666666666666666666666
+TD2 500000000000000000000000
+MP 20833333333333333333333
+executing BondDepository.setRewards (tx: 0x20e6e0bf505fb2e3fef7a0d7da48b40fd78e7092d75724f075ba5e8b932c2efd) ...: performed with 73400 gas
+executing BondDepository.create (tx: 0x72f3e2d04016d936a3c2e80f2b6737d63dd340fc0aa5a9d4cb542e9058007257) ...: performed with 348970 gas
+Current block timestamp 1643753686
+TD1 1250000000000000000
+TD2 5000000000000000000
+MP 55555555555555555
+executing BondDepository.create (tx: 0x153f3f6ba4cefe70e44f66b82129f0594b49fed623faa9ceed1ffb679aeab6ec) ...: performed with 317534 gas

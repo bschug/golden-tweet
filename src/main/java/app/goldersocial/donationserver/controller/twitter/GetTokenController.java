@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import app.goldersocial.donationserver.cloud.twitter.TwitterApiConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,9 @@ public class GetTokenController {
     @Autowired
     private TwitterApiConfig twitterApiConfig;
 
+    @Value("${twitter.api.callback}")
+    private String twitterApiCallbackUrl;
+
     @RequestMapping("/getToken")
     public RedirectView getToken(HttpServletRequest request, Model model) {
         //this will be the URL that we take the user to
@@ -27,11 +31,8 @@ public class GetTokenController {
             //get the Twitter object
             Twitter twitter = twitterApiConfig.getTwitter();
 
-            //get the callback url so they get back here
-            String callbackUrl = "http://localhost:8888/twitterCallback";
-
             //go get the request token from Twitter
-            RequestToken requestToken = twitter.getOAuthRequestToken(callbackUrl);
+            RequestToken requestToken = twitter.getOAuthRequestToken(twitterApiCallbackUrl);
 
             //put the token in the session because we'll need it later
             request.getSession().setAttribute("requestToken", requestToken);

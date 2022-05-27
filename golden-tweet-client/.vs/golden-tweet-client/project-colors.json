@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "ac8369a8-5a7b-4db7-a2d5-e71d8f94f46c": {
+      "ProjectGuid": "ac8369a8-5a7b-4db7-a2d5-e71d8f94f46c",
+      "DisplayName": "golden-tweet-client",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

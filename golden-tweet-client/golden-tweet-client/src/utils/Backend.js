@@ -1,4 +1,4 @@
-import { axios } from 'axios'
+import axios from 'axios';
 
 const BACKEND_URL = '';
 
@@ -36,10 +36,8 @@ export async function connectWallet() {
  */
 }
 
-export async function tweetAuthor(url) {
-    var data = await axios.get(BACKEND_URL + '/tweetAuthor', {
-        url: url
-    });
+export async function tweetAuthor(tweetId) {
+    var data = await axios.get(BACKEND_URL + '/tweet/' + tweetId + '/author');
     console.log(data.author);
 
     /*

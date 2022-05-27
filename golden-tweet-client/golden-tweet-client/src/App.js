@@ -6,7 +6,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 //internal:
 import TweetPreview from './components/TweetPreview'
-import { userWallet, userWalletByTwitterUserId, connectWallet } from './utils/Backend'
+import { userWallet, userWalletByTwitterUserId, connectWallet, tweetAuthor } from './utils/Backend'
 
 //Web3:
 import { ethers, getDefaultProvider } from 'ethers';
@@ -21,7 +21,13 @@ const _diamondAddress = '0xC9fd3EFfFf3f6ab127522634c63Ba7160d878D57';
 
 function App() {
     useEffect(() => {
+        testBackend();
     }, []);
+
+    async function testBackend() {
+        var result = await tweetAuthor(1530153225592229888);
+        console.log(result);
+    }
 
     const [state, setState] = useState({
         isConfirmationVisible: false
@@ -271,7 +277,7 @@ function App() {
                 <h4>some info</h4>
                 <button onClick={onSendRewardClick}>Approve</button>
 
-                <TweetPreview tweetId={state?.tweetId}/>
+                <TweetPreview tweetId={state?.tweetId} />
             </div>
         </div>
     );

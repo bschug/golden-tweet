@@ -3,8 +3,7 @@ import axios from 'axios';
 const BACKEND_URL = '';
 
 export async function userWallet() {
-    var data = await axios.get(BACKEND_URL + '/userWallet');
-    console.log(data);
+    return await axios.get(BACKEND_URL + '/userWallet');
 
     /*
  GET /userWallet
@@ -16,8 +15,7 @@ export async function userWallet() {
 }
 
 export async function userWalletByTwitterUserId(twitterUserId) {
-    var data = await axios.get(BACKEND_URL + '/userWallet/' + twitterUserId);
-    console.log(data.wallet);
+    return await axios.get(BACKEND_URL + '/userWallet/' + twitterUserId);
 
     /*
  GET /userWallet/{twitterUserId}
@@ -26,8 +24,7 @@ export async function userWalletByTwitterUserId(twitterUserId) {
 }
 
 export async function connectWallet() {
-    var data = await axios.post(BACKEND_URL + '/connectWallet');
-    console.log(data.wallet);
+    return await axios.post(BACKEND_URL + '/connectWallet');
 
     /*
  POST /connectWallet
@@ -37,8 +34,7 @@ export async function connectWallet() {
 }
 
 export async function tweetAuthor(tweetId) {
-    var data = await axios.get(BACKEND_URL + '/tweet/' + tweetId + '/author');
-    console.log(data.author);
+    return await axios.get(BACKEND_URL + '/tweet/' + tweetId + '/author');
 
     /*
   GET /tweetAuthor/?url=urlencoded-tweet-url

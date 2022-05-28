@@ -25,7 +25,7 @@ function App() {
 
     async function testBackend(tweetId) {
         var result = await tweetAuthor(tweetId);
-        console.log(result);
+        console.log(result.data);
     }
 
     const [state, setState] = useState({

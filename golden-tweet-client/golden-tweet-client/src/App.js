@@ -17,10 +17,19 @@ import SocialNFT from './jsons/SocialNFT.json';
 import SocialDiamond from './jsons/SocialDiamond.json';
 
 const _daiAddress = '0x8B5D21DEfB46ec472B113639338c9401B0D0b60d';
-const _diamondAddress = '0xC9fd3EFfFf3f6ab127522634c63Ba7160d878D57';
+const _diamondAddress = '0x9Ac97A1FA8654Ea254ed6660d320E0287b93149b';
 
 function App() {
     useEffect(() => {
+        onRefreshClick();
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log('auto refresh called');
+            onRefreshClick();
+        }, 5000);
+        return () => clearInterval(interval);
     }, []);
 
     const [state, setState] = useState({
@@ -123,6 +132,9 @@ function App() {
             ...prevState,
             donated: donated
         }));
+
+        onCancelClick();
+        alert('Donation succesfully sent!');
     };
 
     var onConnectWalletClick = async () => {
@@ -244,12 +256,16 @@ function App() {
                 <h2>3. Choose amount & select coin</h2>
 
                 <input onChange={(e) => onAmountChanged(e.target.value)} type="number" className="amount" defaultValue="1" min="1" />
+
+
+
                 <select>
-                    <option value="test" defaultValue>Generosity Coin</option>
+                    <option value="test" defaultValue>DAI Stable Coin</option>
                 </select>
 
                 {state.balance ? '(balance: ' + Math.round(state.balance) + ')' : ''}
-                {state.allowance === 0 ? '(allowance: ' + state.allowance + ')' : ''}
+                {state.allowance === 0 ? '(allowance: ' + state.allowance + ') ' : ''}
+                <button className={state.allowance === 0 ? '' : 'invisible'} onClick={onApprovalClick}>Approval</button>
 
                 <br />
 
@@ -263,9 +279,7 @@ function App() {
                 <br />
 
                 <h2>4. Reward the tweet</h2>
-                <button onClick={onRewardClick} disabled={!state?.tweetId}>Reward</button>
-                <button onClick={onApprovalClick}>Approval</button>
-                <button onClick={onRefreshClick}>Refresh</button>
+                <button className="reward-button" onClick={onRewardClick} disabled={!state?.tweetId}>Reward</button>
 
                 <TweetPreview tweetId={state?.tweetId} />
             </div>
@@ -276,7 +290,7 @@ function App() {
                 <h2>Summary</h2>
 
                 <h4>Donate {amount + ' Generosity Coin(s)'}</h4>
-                <button className="donate-button" onClick={onSendRewardClick}>Approve</button>
+                <button className="donate-button" onClick={onSendRewardClick}>Send Donation</button>
 
                 <TweetPreview tweetId={state?.tweetId} />
             </div>

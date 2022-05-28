@@ -98,7 +98,7 @@ select {
     margin: auto;
 }
 
-.donate-button, .connect-button, .back {
+.donate-button, .connect-button, .back, .reward-button {
     color: white;
     border: none;
     border-radius: 20px;
@@ -117,3 +117,11 @@ select {
 .back {
     background-color: darkcyan;
 }
+
+.reward-button {
+    background-color: darkorange;
+}
+
+    .reward-button:disabled {
+        background-color: gray;
+    }

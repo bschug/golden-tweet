@@ -1,7 +1,7 @@
 awslocal dynamodb create-table \
     --table-name authors \
     --attribute-definitions \
-    AttributeName=twitter_id,AttributeType=S \
+    AttributeName=twitter_id,AttributeType=N \
     --key-schema \
     AttributeName=twitter_id,KeyType=HASH \
     --provisioned-throughput \

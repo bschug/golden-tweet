@@ -40,7 +40,13 @@
 
 
 a {
-    padding: 20px;
+    padding: 8px 16px 8px 16px;
+    background-color: cornflowerblue;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 15px;
 }
 
 .twitter-tweet {
@@ -48,10 +54,11 @@ a {
 }
 
 .approval {
-    background-color: lightgray;
+    background-color: cadetblue;
     width: 400px;
     margin: auto;
     padding: 30px;
+    color: white;
 }
 
 .invisible {
@@ -72,4 +79,65 @@ select {
 
 .amount {
     width: 50px;
+}
+
+
+.connect {
+    background-color: lightblue;
+    padding: 10px;
+}
+
+.tweet-input {
+    width: 500px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.main-input {
+    width: 500px;
+    margin: auto;
+}
+
+.donate-button, .connect-button, .back, .reward-button, .approval-button {
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.donate-button {
+    background-color: darkslategray;
+}
+
+.connect-button {
+    background-color: cadetblue;
+}
+
+.back {
+    background-color: darkcyan;
+}
+
+.reward-button, .approval-button {
+    background-color: darkorange;
+}
+
+.approval-button {
+    background-color: blueviolet;
+}
+
+.reward-button:disabled {
+    background-color: gray;
+}
+
+.donated-panel {
+    background-color: darkorange;
+    color: white;
+    width: 200px;
+    display: block;
+    margin: auto;
+    padding: 23px;
+    font-size: 23px;
+    border-radius: 10px;
+    font-weight: 600;
 }

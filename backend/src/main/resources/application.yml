@@ -12,7 +12,9 @@ spring:
     name: donation-server
 twitter:
   api:
-    clientid: key
-    secret: secret
-    callback: http://localhost:8888/twitterCallback
+    clientid: test
+    secret: test
+    callback: http://social-diamond.legendary-api.gg/twitterCallback
+    token:
+      request: http://social-diamond.legendary-api.gg/getToken
 env: local

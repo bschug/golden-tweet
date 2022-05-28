@@ -72,15 +72,17 @@ function App() {
     };
 
     var onRefreshClick = async () => {
-        var erc20Contract = await getErc20Contract();
-
         var address = await getAddress();
-        var allowance = await erc20Contract.allowance(address, _diamondAddress);
-        allowance = ethers.utils.formatEther(allowance);
+        var socialDiamondContract = await getSocialDiamondContract();
+
+        var donated = await socialDiamondContract.donated(address);
+        donated = ethers.utils.formatEther(donated);
+
+        loadBalance();
 
         setState(prevState => ({
             ...prevState,
-            allowance: allowance
+            donated: donated
         }));
     };
 

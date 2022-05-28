@@ -99,7 +99,11 @@ function App() {
     };
 
     var onSendRewardClick = async () => {
-        const recepientAddress = '0x56d15fcbf7Be4E25a18F0A11331F9961f58a311c';
+        var tweetAuthorResult = await tweetAuthor(state.tweetId);
+        var twitterUserId = tweetAuthorResult.data.author;
+
+        var userWalletByTwitterUserIdResult = await userWalletByTwitterUserId(twitterUserId);
+        var recepientAddress = userWalletByTwitterUserIdResult.data.wallet;
 
         console.log('amount: ' + amount);
         var _amount = ethers.BigNumber
@@ -152,6 +156,7 @@ function App() {
         console.log(socialDiamondContract);
 
         var address = await getAddress();
+        await connectWallet(address);
 
         var donated = await socialDiamondContract
             .donated(address);
@@ -216,7 +221,7 @@ function App() {
 
     return (
         <div className="App">
-            <div>
+            <div className="connect">
                 Connect to wallet
                 <button onClick={onConnectWalletClick}>Connect</button>
                 <br />
@@ -236,7 +241,7 @@ function App() {
                 <br />
 
                 <h2>2. Paste a link to a tweet</h2>
-                <input onChange={(e) => onTweetLinkChanged(e.target.value)} type="text" placeholder="Tweet Link" />
+                <input className="tweet-input" onChange={(e) => onTweetLinkChanged(e.target.value)} type="text" placeholder="Tweet Link" />
 
                 <br />
                 <br />

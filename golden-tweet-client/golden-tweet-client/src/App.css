@@ -73,3 +73,14 @@ select {
 .amount {
     width: 50px;
 }
+
+
+.connect {
+    background-color: lightblue;
+}
+
+.tweet-input {
+    width: 409px;
+    height: 40px;
+    font-size: 20px;
+}

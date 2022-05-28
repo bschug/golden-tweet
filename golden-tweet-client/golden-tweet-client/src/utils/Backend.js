@@ -23,8 +23,10 @@ export async function userWalletByTwitterUserId(twitterUserId) {
  */
 }
 
-export async function connectWallet() {
-    return await axios.post(BACKEND_URL + '/connectWallet');
+export async function connectWallet(wallet) {
+    return await axios.post(BACKEND_URL + '/connectWallet', {
+        wallet: wallet
+    });
 
     /*
  POST /connectWallet

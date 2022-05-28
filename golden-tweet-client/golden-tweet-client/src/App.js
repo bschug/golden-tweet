@@ -21,11 +21,10 @@ const _diamondAddress = '0xC9fd3EFfFf3f6ab127522634c63Ba7160d878D57';
 
 function App() {
     useEffect(() => {
-        testBackend();
     }, []);
 
-    async function testBackend() {
-        var result = await tweetAuthor(1530153225592229888);
+    async function testBackend(tweetId) {
+        var result = await tweetAuthor(tweetId);
         console.log(result);
     }
 
@@ -42,6 +41,8 @@ function App() {
         if (index != -1) {
             var tweetId = value.substr(index + 1);
         }
+
+        testBackend(tweetId);
 
         setState(prevState => ({
             ...prevState,

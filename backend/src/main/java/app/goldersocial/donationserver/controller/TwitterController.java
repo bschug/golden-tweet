@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-@RestController("/tweet")
+@RestController
 public class TwitterController {
     @Autowired
     private TwitterService twitterService;
 
-    @GetMapping("/{tweetId}/author")
+    @GetMapping("/tweet/{tweetId}/author")
     public TweetUserIdResponse findUserIdByTweetId(@PathVariable Long tweetId, HttpServletRequest request)
         throws TwitterException {
         return twitterService.findUserId(tweetId, getTwitterObject(request));

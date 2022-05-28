@@ -20,7 +20,7 @@ public class TwitterCallbackController {
     public RedirectView twitterCallback(@RequestParam(value="oauth_verifier", required=false) String oauthVerifier,
                                         @RequestParam(value="denied", required=false) String denied,
                                         HttpServletRequest request, HttpServletResponse response, Model model) {
-
+        log.info("TWITTER TOKEN -> Redirect to the twitter view");
         if (denied != null) {
             //if we get here, the user didn't authorize the app
             return new RedirectView("error.html");

@@ -43,7 +43,9 @@ contract SocialDiamond is Ownable {
     string memory _link,
     address _recipient
   ) public {
-    IERC20(asset).transferFrom(msg.sender, address(this), _amount);
+    require(_recipient != address(0), "invalid recipient");
+    require(_amount > 0, "invalid amount");
+    IERC20(asset).transferFrom(msg.sender, _recipient, _amount);
     rewardPerTweet[_link] += _amount;
     totalTransactionVolume += _amount;
     userRewards[_recipient].pending += _amount;
@@ -100,6 +102,12 @@ contract SocialDiamond is Ownable {
     donated[msg.sender] = _new;
     if (tiers[0] > _current && tiers[0] <= _new) {
       return true;
-    } else return false;
+    } else if (tiers.length > 1 && tiers[1] > _current && tiers[1] <= _new) {
+      return true;
+    }else return false;
+  }
+
+  function setTiers(uint256[] memory _newTiers) public onlyOwner{
+    tiers = _newTiers;
   }
 }

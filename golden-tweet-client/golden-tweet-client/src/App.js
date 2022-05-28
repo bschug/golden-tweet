@@ -23,11 +23,6 @@ function App() {
     useEffect(() => {
     }, []);
 
-    async function testBackend(tweetId) {
-        var result = await tweetAuthor(tweetId);
-        console.log(result.data);
-    }
-
     const [state, setState] = useState({
         isConfirmationVisible: false
     });
@@ -41,8 +36,6 @@ function App() {
         if (index != -1) {
             var tweetId = value.substr(index + 1);
         }
-
-        testBackend(tweetId);
 
         setState(prevState => ({
             ...prevState,
@@ -230,7 +223,7 @@ function App() {
 
             <h1>Social Diamond</h1>
 
-            <div className={state.isConfirmationVisible ? 'invisible' : ''}>
+            <div className={state.isConfirmationVisible ? 'invisible' : 'main-input'}>
                 <h2>1. Login to a social network</h2>
 
                 <a href="">Twitter</a>
@@ -280,8 +273,8 @@ function App() {
 
                 <h2>Summary</h2>
 
-                <h4>some info</h4>
-                <button onClick={onSendRewardClick}>Approve</button>
+                <h4>Donate {amount + ' Generosity Coin(s)'}</h4>
+                <button className="donate-button" onClick={onSendRewardClick}>Approve</button>
 
                 <TweetPreview tweetId={state?.tweetId} />
             </div>

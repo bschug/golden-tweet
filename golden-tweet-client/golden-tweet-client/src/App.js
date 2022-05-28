@@ -232,7 +232,7 @@ function App() {
                 Connect to wallet
                 <button className="connect-button" onClick={onConnectWalletClick}>Connect</button>
                 <br />
-                <span className="donated-panel">{state.donated ? 'Donated: ' + Math.round(state.donated) : ''}</span>
+                <span className={state.donated && state.donated > 0 ? 'donated-panel' : 'invisible'}>{state.donated && state.donated > 0 ? 'Donated: ' + Math.round(state.donated) : ''}</span>
             </div>
 
             <h1>Social Diamond</h1>

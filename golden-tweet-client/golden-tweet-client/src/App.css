@@ -129,3 +129,15 @@ select {
 .reward-button:disabled {
     background-color: gray;
 }
+
+.donated-panel {
+    background-color: darkorange;
+    color: white;
+    width: 200px;
+    display: block;
+    margin: auto;
+    padding: 23px;
+    font-size: 23px;
+    border-radius: 10px;
+    font-weight: 600;
+}

@@ -7,10 +7,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @DynamoDBTable(tableName = "authors")
 @Setter
 @Getter

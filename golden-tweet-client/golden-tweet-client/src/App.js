@@ -232,7 +232,7 @@ function App() {
                 Connect to wallet
                 <button className="connect-button" onClick={onConnectWalletClick}>Connect</button>
                 <br />
-                {state.donated ? 'Donated: ' + Math.round(state.donated) : ''}
+                <span className="donated-panel">{state.donated ? 'Donated: ' + Math.round(state.donated) : ''}</span>
             </div>
 
             <h1>Social Diamond</h1>
@@ -265,7 +265,7 @@ function App() {
 
                 {state.balance ? '(balance: ' + Math.round(state.balance) + ')' : ''}
                 {state.allowance === 0 ? '(allowance: ' + state.allowance + ') ' : ''}
-                <button className={state.allowance === 0 ? '' : 'invisible'} onClick={onApprovalClick}>Approval</button>
+                <button className={state.allowance < 200 ? 'approval-button' : 'invisible'} onClick={onApprovalClick}>Approve Spending</button>
 
                 <br />
 

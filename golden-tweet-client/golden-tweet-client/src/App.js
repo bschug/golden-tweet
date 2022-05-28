@@ -235,8 +235,7 @@ function App() {
                 <span className={state.donated && state.donated > 0 ? 'donated-panel' : 'invisible'}>{state.donated && state.donated > 0 ? 'Donated: ' + Math.round(state.donated) : ''}</span>
             </div>
 
-            <h2>Social Diamond</h2>
-            <img src="logo.jpg" width="200" />
+            <h1>Social Diamond</h1>
 
             <div className={state.isConfirmationVisible ? 'invisible' : 'main-input'}>
                 <h2>1. Login to a social network</h2>

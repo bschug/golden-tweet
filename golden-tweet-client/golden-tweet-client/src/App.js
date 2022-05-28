@@ -216,7 +216,7 @@ function App() {
         <div className="App">
             <div className="connect">
                 Connect to wallet
-                <button onClick={onConnectWalletClick}>Connect</button>
+                <button className="connect-button" onClick={onConnectWalletClick}>Connect</button>
                 <br />
                 {state.donated ? 'Donated: ' + Math.round(state.donated) : ''}
             </div>

@@ -40,7 +40,7 @@
 
 
 a {
-    padding: 8px;
+    padding: 8px 16px 8px 16px;
     background-color: cornflowerblue;
     border-radius: 20px;
     color: white;
@@ -98,11 +98,22 @@ select {
     margin: auto;
 }
 
-.donate-button {
-    background-color: darkslategray;
+.donate-button, .connect-button, .back {
     color: white;
     border: none;
     border-radius: 20px;
     padding: 12px;
     font-size: 15px;
+}
+
+.donate-button {
+    background-color: darkslategray;
+}
+
+.connect-button {
+    background-color: cadetblue;
+}
+
+.back {
+    background-color: darkcyan;
 }

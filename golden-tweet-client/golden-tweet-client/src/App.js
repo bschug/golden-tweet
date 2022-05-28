@@ -289,7 +289,7 @@ function App() {
 
                 <h2>Summary</h2>
 
-                <h4>Donate {amount + ' Generosity Coin(s)'}</h4>
+                <h4>Donate {amount + ' DAI Stable Coin(s)'}</h4>
                 <button className="donate-button" onClick={onSendRewardClick}>Send Donation</button>
 
                 <TweetPreview tweetId={state?.tweetId} />

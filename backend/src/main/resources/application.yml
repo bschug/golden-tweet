@@ -4,17 +4,18 @@ amazon:
     region: eu-central-1
     secretkey: test
   dynamodb:
-    endpoint: 'http://localhost:4566/'
+    endpoint: 'http://dynamodb.us-east-1.amazonaws.com/'
 server:
   port: 8888
+  env: prod
 spring:
   application:
     name: donation-server
+    url: https://social-diamond.legendary-api.com/
 twitter:
   api:
-    clientid: test
-    secret: test
-    callback: http://social-diamond.legendary-api.gg/twitterCallback
+    clientid: y7A7dhU8o193NCmHqjsUSYnNZ
+    secret: Es22IHfi2zQRjIyxbhvg8wSGKzeNbvS4uisQpCzXe0RyT6nobH
+    callback: https://social-diamond.legendary-api.com/twitterCallback
     token:
-      request: http://social-diamond.legendary-api.gg/getToken
-env: local
+      request: https://social-diamond.legendary-api.com/getToken

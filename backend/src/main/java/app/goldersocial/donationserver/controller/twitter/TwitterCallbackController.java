@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,9 @@ import twitter4j.auth.RequestToken;
 @RestController
 @Slf4j
 public class TwitterCallbackController {
+    @Value("${spring.application.url}")
+    private String mainUrl;
+
     @RequestMapping("/twitterCallback")
     public RedirectView twitterCallback(@RequestParam(value="oauth_verifier", required=false) String oauthVerifier,
                                         @RequestParam(value="denied", required=false) String denied,
@@ -29,7 +33,7 @@ public class TwitterCallbackController {
         //get the objects from the session
         Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
         RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
-
+        log.info("TWITTER TOKEN -> Got twitter from session");
         try {
             //get the access token
             AccessToken token = twitter.getOAuthAccessToken(requestToken, oauthVerifier);
@@ -40,7 +44,9 @@ public class TwitterCallbackController {
             //store the user name so we can display it on the web page
             model.addAttribute("username", twitter.getScreenName());
             //twitter.getOAuthAccessToken().userId -- unique ID
-            return new RedirectView("index.html");
+            log.info("TWITTER TOKEN -> start redirect");
+
+            return new RedirectView(mainUrl);
         } catch (Exception e) {
             log.error("Problem getting token!",e);
             return new RedirectView("error.html");

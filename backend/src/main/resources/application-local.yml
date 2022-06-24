@@ -7,15 +7,15 @@ amazon:
     endpoint: 'http://dynamodb.us-east-1.amazonaws.com/'
 server:
   port: 8888
-  env: prod
+  env: local
 spring:
   application:
     name: donation-server
-    url: https://social-diamond.legendary-api.com/
+    url: http://localhost:8888/
 twitter:
   api:
     clientid: y7A7dhU8o193NCmHqjsUSYnNZ
     secret: Es22IHfi2zQRjIyxbhvg8wSGKzeNbvS4uisQpCzXe0RyT6nobH
-    callback: https://social-diamond.legendary-api.com/twitterCallback
+    callback: http://localhost:8888/twitterCallback
     token:
-      request: https://social-diamond.legendary-api.com/getToken
+      request: http://localhost:8888/getToken

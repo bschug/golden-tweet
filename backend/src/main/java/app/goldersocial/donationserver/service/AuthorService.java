@@ -47,6 +47,7 @@ public class AuthorService {
     }
 
     public UserWalletResponseData getUserWalletData(Long twitterUserId) {
+
         AuthorsModel authorsModel = authorsRepository.fetchWalletByUserId(twitterUserId);
 
         if (authorsModel == null || authorsModel.getTwitterId() == null) {

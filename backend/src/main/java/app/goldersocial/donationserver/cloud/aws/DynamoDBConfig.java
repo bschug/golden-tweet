@@ -1,9 +1,12 @@
 package app.goldersocial.donationserver.cloud.aws;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +25,15 @@ public class DynamoDBConfig {
     @Value("${amazon.aws.secretkey}")
     private String amazonAWSSecretKey;
 
+    @Value("${server.env}")
+    private String serverEnv;
+
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
+        if (!serverEnv.equals("local")) {
+            return AmazonDynamoDBClientBuilder.defaultClient();
+        }
+
         AmazonDynamoDB amazonDynamoDB
             = new AmazonDynamoDBClient(amazonAWSCredentials());
 

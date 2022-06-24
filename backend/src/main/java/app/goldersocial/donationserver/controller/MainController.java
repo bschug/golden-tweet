@@ -17,12 +17,15 @@ public class MainController {
     @Value("${twitter.api.token.request}")
     private String twitterTokenRequestUrl;
 
+    @Value("${spring.application.url}")
+    private String springUrl;
+
     @GetMapping("/")
-    public Object index(HttpServletRequest request) {
+    public RedirectView index(HttpServletRequest request) {
         if (request.getSession() == null || request.getSession().getAttribute("twitter") == null) {
-            return this.restTemplate.getForEntity(twitterTokenRequestUrl, RedirectView.class);
+            return new RedirectView(twitterTokenRequestUrl);
         }
-        return new RedirectView("index.html");
+        return new RedirectView(springUrl + "index.html");
     }
 
 }

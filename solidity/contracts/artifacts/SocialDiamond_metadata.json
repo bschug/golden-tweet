@@ -13,9 +13,9 @@
 						"type": "address"
 					},
 					{
-						"internalType": "address",
-						"name": "_reward",
-						"type": "address"
+						"internalType": "uint256[]",
+						"name": "_tiers",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -61,6 +61,44 @@
 						"type": "address"
 					}
 				],
+				"name": "countTweetsFunded",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "currentTier",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
 				"name": "donated",
 				"outputs": [
 					{
@@ -93,6 +131,73 @@
 				"name": "fundTweet",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "funded",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "getTweetFundedForUser",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_tweet",
+						"type": "string"
+					}
+				],
+				"name": "getTweetFunding",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -162,6 +267,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_newReward",
+						"type": "address"
+					}
+				],
+				"name": "replaceReward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
@@ -176,6 +294,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "_newTiers",
+						"type": "uint256[]"
+					}
+				],
+				"name": "setTiers",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -202,6 +333,30 @@
 				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tweetsFundedForUser",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -257,11 +412,11 @@
 	},
 	"sources": {
 		"contracts/SocialDiamond.sol": {
-			"keccak256": "0xa20356dde51cb446080d0512a9d8c91ce876bd18154f6bd38b569d547b5b3aa6",
+			"keccak256": "0x7eecd0f4324dd0b879c579845b7d993ff02a165fd655177f15f08fc7742a1d1a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f160686776da9b471ceeaf2354cb5aa272f80439da946da156399bacb9991a7c",
-				"dweb:/ipfs/QmW3MWaxiErdPEmVNQVbXPAFPRfsHGAkQ5ryr77jHmLMLb"
+				"bzz-raw://d1987086506e602594824762a7787ee27fd0c5f175260289d144b1b71e6c1d9c",
+				"dweb:/ipfs/QmVmy2YPRaTzE491rUcNDeEHntmHb7JY4eAJV1LQ2yRLHV"
 			]
 		},
 		"contracts/interfaces/ERC20/IERC20.sol": {
@@ -272,12 +427,12 @@
 				"dweb:/ipfs/QmSTU2wWVXKN4GfYYZXa4Gup7ka1aNuHsr8fsUA7vphPYS"
 			]
 		},
-		"contracts/interfaces/ERC20/IERC20Mintable.sol": {
-			"keccak256": "0x5e534afedb9beae36fe1836fbf8d0b3b29ca373345744e44758dd850a32beaf2",
+		"contracts/interfaces/ISocialNFT.sol": {
+			"keccak256": "0x1184397b407b75ad386729e323212ee2ecc879b2a569c623b4df1ea7825cdf2b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://519444d292965613a2a9011cd47154899c22ec18191311a7493e897cf0156b14",
-				"dweb:/ipfs/QmSRZVs3wDSFXYAFn8NnxBcJd58mjKkn4bdZRoVfi3bACD"
+				"bzz-raw://064d889e0a97229985091bc32f9556924b2ae47de9a5449525c747d7489d55bb",
+				"dweb:/ipfs/QmUJMW9q33dnggSiustqhfr64q77KzUQhUXbmM4pXpPHc9"
 			]
 		},
 		"contracts/libraries/EnumerableSet.sol": {

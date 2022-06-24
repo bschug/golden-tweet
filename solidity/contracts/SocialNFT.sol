@@ -4,16 +4,17 @@ pragma solidity 0.8.14;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./libraries/Ownable.sol";
 import "hardhat/console.sol";
 
 import {Base64} from "./libraries/Base64.sol";
 
 // solhint-disable
 
-contract SocialNFT is ERC721URIStorage {
+contract SocialNFT is ERC721URIStorage, Ownable {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
-  address minter;
+  mapping(address => bool) minters;
 
   mapping(address => uint256[]) public userOwnedTokens;
   mapping(uint256 => uint256) public tokenIsAtIndex;
@@ -25,28 +26,28 @@ contract SocialNFT is ERC721URIStorage {
     "'/><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
   string[] firstWords = [
-    "Ross",
-    "Rachel",
-    "Monica",
-    "Joey",
-    "Chandler",
-    "Phoebe"
+    "Ross ",
+    "Rachel ",
+    "Hagrid ",
+    "Joey ",
+    "Chandler ",
+    "Phoebe "
   ];
   string[] secondWords = [
-    "Harry",
-    "Hermione",
-    "Potter",
-    "Ron",
-    "Hagrid",
-    "Muggle"
+    "likes ",
+    "hates ",
+    "eats ",
+    "spills ",
+    "drinks ",
+    "smells "
   ];
   string[] thirdWords = [
-    "Ronaldo",
-    "Messi",
-    "Zlatan",
-    "Bruno",
-    "Neymar",
-    "Pele"
+    "shoe",
+    "banana",
+    "ice cream",
+    "beer",
+    "pizza",
+    "rotten fish"
   ];
 
   // Get fancy with it! Declare a bunch of colors.
@@ -54,8 +55,7 @@ contract SocialNFT is ERC721URIStorage {
 
   event NewEpicNFTMinted(address sender, uint256 tokenId);
 
-  constructor(address _minter) ERC721("SquareNFT", "SQUARE") {
-    minter = _minter;
+  constructor() ERC721("SocialNFT", "SNFT") Ownable() {
   }
 
   function pickRandomFirstWord(uint256 tokenId)
@@ -112,7 +112,7 @@ contract SocialNFT is ERC721URIStorage {
   }
 
   function mint(address _to) public {
-    require(msg.sender == minter, "Only Minter Can Interact");
+    require(minters[msg.sender], "Only Minter Can Interact");
     uint256 newItemId = _tokenIds.current();
 
     string memory first = pickRandomFirstWord(newItemId);
@@ -173,5 +173,13 @@ contract SocialNFT is ERC721URIStorage {
     returns (uint256[] memory _ret)
   {
     _ret = userOwnedTokens[_user];
+  }
+
+  function setMinter(address _newMinter) public onlyOwner {
+    minters[_newMinter] = true;
+  }
+
+  function removeMinter(address _minter) public onlyOwner {
+    minters[_minter] = false;
   }
 }

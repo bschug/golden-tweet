@@ -5,6 +5,7 @@ const { ethers, upgrades } = require('hardhat')
 const { parseUnits } = require('ethers/lib/utils')
 const { expectRevert } = require('@openzeppelin/test-helpers')
 
+
 describe('GoldenTweet Test', async function () {
   let socialDiamond
   let socialNFT
@@ -24,10 +25,9 @@ describe('GoldenTweet Test', async function () {
     const SocialDiamond = await ethers.getContractFactory('SocialDiamond')
 
     const DAI = await ethers.getContractFactory('MockERC20')
-    const BTC = await ethers.getContractFactory('MockERC20')
 
     dai = await DAI.deploy("DAI", "DAI Stblecoin", 18)
-    // mint7
+    // mint
     await dai.mint(contractOwner.address, parseUnits("124314", 18))
 
     const Token = await ethers.getContractFactory('Generosity')
@@ -38,7 +38,8 @@ describe('GoldenTweet Test', async function () {
     socialDiamond = await SocialDiamond.deploy(dai.address, [parseUnits('100', 18)]);
 
     const SocialNFT = await ethers.getContractFactory('SocialNFT')
-    socialNFT = await SocialNFT.deploy(socialDiamond.address)
+    socialNFT = await SocialNFT.deploy()
+    await socialNFT.setMinter(socialDiamond.address)
     await socialDiamond.replaceReward(socialNFT.address)
     await socialDiamond.deployed();
 
@@ -56,6 +57,8 @@ describe('GoldenTweet Test', async function () {
     reward = await socialDiamond.userRewards(creator.address)
     expect(reward.pending.toString()).to.equal("213321321")
     expect(reward.claimed.toString()).to.equal("0")
+    const balRecipient = await dai.balanceOf(creator.address)
+    expect(balRecipient.toString()).to.equal("213321321")
     fundForLink = await socialDiamond.userRewards(creator.address)
     linksFunded = await socialDiamond.getTweetFundedForUser(contractOwner.address, 0)
     console.log("FUNDED", linksFunded)
@@ -82,6 +85,13 @@ describe('GoldenTweet Test', async function () {
     console.log("ID", owned)
 
     expect(owned[0], 0)
+
+    const uri = await socialNFT.tokenURI(owned[0])
+
+    const newStr = uri.substring(uri.indexOf(',') + 1, uri.length)
+
+    console.log(Buffer.from(JSON.stringify(newStr)).toString("base64"))
+
   })
 
   // it('mints NFT', async () => {
